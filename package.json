@@ -14,3 +14,8 @@
   "author": "Catatan Nahda",
   "license": "ISC"
 }
+
+let name ="Nahda";
+let age = 21;
+let university = "IAIN Metro"
+

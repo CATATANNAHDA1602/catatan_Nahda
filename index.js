@@ -16,6 +16,8 @@ console.log (name);
 let data = "this is a simple string";
 console.log(name)
 
+let name ="Nahda"
+
 data = "Nahda"
 console.log(data);
 
@@ -117,7 +119,7 @@ const sampleArray =[
      * -- merupakan decrement (atau mengurang 1)
      * 
      * 
-     * */
+     */
      const foods = ["noodle", "egg", "rice"];
     for (let i = 0; i < foods.length; i++) {
         console.log(foods[i]);   
@@ -181,7 +183,7 @@ const sampleArray =[
           * ketika variable dalam kondisi if () bernilai boolean cukup gunakan nama variable jika ingin,
           * memperiksa bahwa itu benar atau true. jika ingin memperiksa jika itu salah cukup gunakan !namaVariable
           * yang artinya ! melambangkan negativ value dalam kasus boolean negativ adalah false.
-            */
+         */
          // const pertama 
          const isLoggedin = true;
 
@@ -220,6 +222,201 @@ const sampleArray =[
 
          }
 
+/**  
+ * ini merupakan declaration dari sebuah function sederhana,
+ * declaration function di tulis dengan keywords function namaFunction()
+ * jika function tidak memiliki keywords returns dia merupakan void function
+ * yang berarti function tersebut tidak mengembalikan nilai apapun ketika digunakan.
+ * backtrik disebut parameter interal. untuk kita bisa menggunaakan paramter dan interal harus memakai tanda kurung kurawa dan dolar.
+ * penggunaaan string literal atau ` ketika ingin menggunakan variable/paramter harus dengan ${}
+ * age = 23 itu merupakan initialization parameter dengan nilai awal atau default value, 
+ * ketika kita melakukan pemangggilan function tanpa mengirim parameter age, maka secara default
+ * age itu bernilai 22 dan jika kita memamsukkan nilai parameter ke 2 nilai age akan sesuai berdasarkan
+ * parameter kedua yang dikirim dari pemanggilan function
+ * greet atau isi dari parameter adalah argument
+ * 
+ * * perkalian
+ * / pembagian
+ * + penjumlahan
+ * - pengurangan
+ * 
+ * @param {*} a
+ * @param {*} b
+ * @returns String
+ */ 
+
+         function greet (name, age = 22){
+            return `Hello, ${name}. My Age is ${age} yo`;
+         }
+
+         const greeting = greet("Nahda", 21); // => jika function memiliki keywords return didalamnya bisa menggunakan variable
+         console.log(greeting);
+
+         console.log(greet("Nahda")); // => Function bisa digunakan langsung tanpa variable seperti contoh berikut
+
+         function add (a, b) {
+            return a * b;
+            return a + b;
+
+         }
+
+         console.log(add(5, 3)); // => Output selalu a + b dalam kasus ini argument nya bernilai 5 dan 3 hasilnya 8
+
+         function fizzBuzz(number) {
+            if (number % 2 == 0) {
+               return "Fizz";
+            }
+
+            if (number % 3 == 0) {
+               return "Buzz";
+            }
+
+            if (number % 5 === 0) {
+               return "FizzBuzz"
+            }
+
+            return "Failed";
+         }
+
+         console.log(fizzBuzz(2));  // => output Fizz
+         console.log(fizzBuzz(3)); // => Output Buzz
+         console.log(fizzBuzz(5)); // => Output FizzBuzz
+         console.log(fizzBuzz(7)); // => Output Failed
+
+         const greetAnon = function(name) {
+            return `Hello, ${name} from anonymous function`
+         }
+
+         console.log(greetAnon("Nahda"));
+         // Arrow Function
+         const greetArrow = (name) => `Hello, ${name} from Arrow Function`;
+
+         console.log(greetArrow("Nahda"));
+
+
+/**
+ * class itu di definisikan dengan keywords class
+ * class juga memiliki constructor, dimana constructor akan selalu di akses di awak ketika
+ * kita melakukan pembuatan  object baru dari class dengan keywords new Car("Toyota", "Camry", 2020)
+ * pada dalam constructor kita menggunakan keywords this. untuk mendefinisikan sebuah property, 
+ * di dalam object. Mirip dengan tipe data object lainnya class juga punya property.
+ */
+         class Car {
+            constructor(name, brand, year){
+               this._name = name;
+               this._brand = brand;
+               this._year = year;
+            }
+
+            information() {
+               return `${this.name} have brand from ${this._brand} and build in ${this._year}`;
+            }
+            
+            // ini adalah setter untuk merubah nilai dari sebuah property
+            setName(name) {
+               this._name = name;
+            }
+
+            //ini adalah getter untuk mengambil data dari sebuah property
+            getName() {
+               return this.name;
+            }
+            // ini merupakan contoh penggunaan seters dengan keywords set
+            set name(value) {
+               if (value === "") { 
+                  this._name = value;
+               } else {
+                  console.log("the value must be not empty string");
+               }
+            }
+            // ini merupakan contoh penggunaan getters dengan keywords get
+            get name() {
+               return this._name;
+            }
+
+            
+
+         }
+
+         const car = new Car("Toyota", "Camry", 2020);
+         console.log(car.information());
+         // car.setName("Daihatsu");
+         car.name = "Daihatsu"; // menggunakan setter untuk merubah data dari property yang ada di class
+         console.log(car.information());
+         console.log(car.name);
+
+         /**
+          * Animal merupakan sebuah parent class yang memiliki property name dan method speak
+          */
+         class Animal {
+            constructor(name) {
+               this.name = name;
+            }
+
+            speak() {
+               console.log(`${this.name} make a sound`);
+            }
+         }
+
+         
+            /**
+             * Dog merupakan sebuah children class yang mewarisi semua yang ada di dalam class Animal
+             * baik itu property maupun method
+             */
+            class Dog extends Animal { 
+               speak() {
+                  console.log("What the dog do'in");
+               }
+
+            }
+
+            const dog = new Dog("Holy")
+            dog.speak();
+
+         /**
+          * Keywords Super digunakan untuk memgakses isi dari parent class
+          */
+         class Cat extends Animal {
+            constructor(name, color) {
+               super(name)
+               this.color = color;
+            }
+
+               speak() {
+                  super.speak();
+                  console.log(`${this.name} meows.`);
+
+
+               }
+         }
+
+         const cat = new Cat("Whisker", "Gray")
+         cat.speak();
+
+         class MathUtil {
+            static add(a, b) {
+               return a + b;
+            }
+
+            static multiply(a, b) {
+            return a * b;
+
+            }
+         }
+
+         console.log(MathUtil.add(1, 2)); //output 3
+         console.log(MathUtil.multiply(5, 3)); // output 15
+
+         /**
+          * 
+          * naming convension class biasanya menggunakan PascalCase atau sebagai contoh LoanDisbursement
+          * Naming Convension variable itu biasanya cameccase atau variableName
+          * Naming Convension function biasanya itu camelcase atau functionName
+          */
+       
+         
+
+         
        
 
          
