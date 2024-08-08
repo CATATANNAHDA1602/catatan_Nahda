@@ -58,3 +58,54 @@ UPDATE students SET grade = 'D' WHERE grade = 'C';
 # semua data
 # jika kita ingin menghapus data yang kita pilih maka gunakan where
 DELETE FROM students where id = i;
+
+
+CREATE TABLE classes (
+    id bigint PRIMARY KEY AUTO_INCREMENT,
+    name varchar(191) not null
+);
+
+CREATE TABLE teachers (
+    id bigint PRIMARY KEY AUTO_INCREMENT,
+    name varchar(191) not null
+);
+
+# column teacher_id pada table classes merupakan foreign key atau menghubung antara table,
+# teachers dan classes dimana 1 kelas itu memiliki oleh 1 guru (One to One) atau
+# 1 guru bisa punya banyak kelas (One to Many)
+# cara mendefinisikan foreign key cukup dengan
+# CONSTRAINT (column) FOREIGN KEY REFERENCE <table> (column) (option)
+
+CREATE TABLE classes (
+    id bigint PRIMARY KEY AUTO_INCREMENT,
+    teacher_id bigint not null,
+    name varcher(191) not null,
+
+    CONSTRAINT
+       FOREIGN KEY (teacher_id)
+       REFERENCES teachers (id) ON DELETE CASCADE
+);
+
+INSERT INTO teacher (name) VALUE ('Roy');
+# ketika kita mau menambahkan data relational kita perlu tahu dulu id dari parent table
+# dalam kasus ini parent table adalah teacher,  dimana kita mau menambahkan kelas
+# terhadap teacher dengan nama Roy dimana Roy memiliki 2 kelas yaitu sistem Informasi dan
+# Teknik Informasi
+
+INSERT INTO classes (teacher_id, name) VALUE
+(1, 'Sistem informasi'),
+(1, 'Teknik Informasi');
+
+
+# dalam proses pengambilan data dari 2 atau lebih table kita perlu melakukan pemanggilan
+# column dengan data <table>.<column>. jika data yang ingin kita tampilkan kita ganti nama,
+# column gunakan AS sebagai alias atau pengganti sementara dari nama column
+# dalam kasus ini kita mencoba mengambil data Guru berdasarkan column teacher_id yang ada di table classes dengan menggunakan
+# inner join. dimana inner join membutuhkan foreign key sebagai kunci asing atau sebagai izin untuk mengakses table yang kita mau
+# dalam hal ini table teachers yang akan kita ambil datanya.
+
+SELECT
+    classes.name as nama_kelas,
+    teachers.name as nama_guru
+FROM classes
+INNER JOIN teachers on classes.teacher_id = teachers.id
